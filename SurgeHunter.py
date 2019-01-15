@@ -52,18 +52,16 @@ def SurgeHunter():
     estimate = get_prices()
     # surge_multiplier = estimate / 37
     if estimate > (37 + 5):
-        send_email(email_to,f'{surge_multiplier} Active Surge','Hunt')
+        send_email(email_to, 'Active Surge','Hunt')
     print ('The API has been queried this many times:', query_count)
     query_count = query_count + 1
     del estimate
-    del surge_multiplier
 
 # Define a function to pring the current date and time: 
 def printTime():
     print("The hunt continues. Another 10 minutes have passed. The current date and time are:  " + str(datetime.datetime.now()))
 
 # All the scheduled events: 
-
 schedule.every().day.at("23:00").do(send_email(email_to, 'test run clocked for 11:00PM', 'the hunt continues'))
 schedule.every(20).minutes.do(SurgeHunter)
 schedule.every(10).minutes.do(printTime)
